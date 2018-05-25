@@ -39,7 +39,7 @@ export default class uploadForm extends Component {
                 </div>
                 <h4>Enter url of google sheet</h4>
                 <form className="uploadForm" onSubmit={this.onFormSubmit.bind(this)}>
-                    <input  className="btn" type="text" onChange={this.onInputChange.bind(this)} />
+                    <input placeholder="https://sheets.googleapis.com/..."  className="btn" type="text" onChange={this.onInputChange.bind(this)} />
                     <input className="btn" type="submit" value="Submit" name="submit" />
                 </form>                
             </div>
