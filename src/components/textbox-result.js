@@ -5,7 +5,7 @@ export const TextBoxResult = ({record})=>{
         return (
             <div className="text-center">
                 <h3>JSON Output</h3>
-                <textarea rows="20" cols="80" value={record}></textarea>
+                <textarea rows="20" cols="80" defaultValue={record}></textarea>
             </div>
         );
     }
