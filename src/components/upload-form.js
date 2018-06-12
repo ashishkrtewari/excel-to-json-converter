@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { processRows } from './process-rows';
+import { googleSheetsConvertor } from './google-sheets-convertor';
 import {TextBoxResult} from './textbox-result'; 
 
 export default class uploadForm extends Component {
@@ -18,31 +18,32 @@ export default class uploadForm extends Component {
 
     onFormSubmit(event) {
         event.preventDefault();
-        // this.setState('record', processRows(this.state.sheeturl));
-        processRows(this.state.sheeturl, (record)=>this.setState({record}));
+        googleSheetsConvertor(this.state.sheeturl, (record)=>this.setState({record}));
     }
 
     render(){
         if(!this.state.record){
             return (
-                <div className="text-center">
-                <div>
-                    <h4>Upload an xlsx file</h4>
-                    <form className="uploadForm"
-                        encType="multipart/form-data"
-                        action="upload"
-                        method="post"
-                    >
-                        <input className="btn" type="file" name="file" />
-                        <input className="btn" type="submit" value="Upload" name="submit" />
-                    </form>
+                <div className="form-section">
+                    <div className="form-element">
+                        <h4>Upload an xlsx file</h4>
+                        <form className="uploadForm"
+                            encType="multipart/form-data"
+                            action="upload"
+                            method="post"
+                        >
+                            <input className="btn" type="file" name="file" />
+                            <input className="btn" type="submit" value="Upload" name="submit" />
+                        </form>
+                    </div>
+                    <div className="form-element">
+                        <h4>Enter url of google sheet</h4>
+                        <form className="uploadForm" onSubmit={this.onFormSubmit.bind(this)}>
+                            <input placeholder="https://sheets.googleapis.com/..."  className="btn" type="text" onChange={this.onInputChange.bind(this)} />
+                            <input className="btn" type="submit" value="Submit" name="submit" />
+                        </form>  
+                    </div>              
                 </div>
-                <h4>Enter url of google sheet</h4>
-                <form className="uploadForm" onSubmit={this.onFormSubmit.bind(this)}>
-                    <input placeholder="https://sheets.googleapis.com/..."  className="btn" type="text" onChange={this.onInputChange.bind(this)} />
-                    <input className="btn" type="submit" value="Submit" name="submit" />
-                </form>                
-            </div>
             );
         }
         else {
